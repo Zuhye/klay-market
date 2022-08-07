@@ -1,17 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import QRCode from 'qrcode.react';
 import { getBalance, readCount, setCount } from './api/UseCaver';
 import { useState } from 'react';
 import * as KlipAPI from './api/UseKlip';
 
-function onPressButton(balance) {
-  console.log('hi');
-}
 
-const onPressButton2 = (_balance, _setBalance) => {
-  _setBalance(_balance);
-}
 const DEFALUT_QR_CODE = "DEFALUT";
 function App() {
   const [balance, setBalance] = useState('0');
@@ -24,14 +17,22 @@ function App() {
     KlipAPI.getAddress(setQrvalue);
   }
 
+  const onClickSetCount = () => {
+    KlipAPI.setCount(2000, setQrvalue);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <button 
           onClick={()=>{
-          //onPressButton2('15', setBalance)
           onClickGetAddress();
           }}>주소 가져오기</button>
+
+        <button 
+          onClick={()=>{
+          onClickSetCount();
+          }}>카운트 값 변경</button>
 
         <br/>
         <br/>
